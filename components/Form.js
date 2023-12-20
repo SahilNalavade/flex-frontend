@@ -77,7 +77,7 @@ const Form = () => {
     }
   
     try {
-      const response = await fetch('https://flex-backend-20e887823b85.herokuapp.com/submitForm', {
+      const response = await fetch('/api/submitForm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
