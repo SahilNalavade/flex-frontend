@@ -55,40 +55,40 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const { name, age, selectedBatch, mobile } = formData;
-
+  
     // Basic validations
     if (!name.trim() || !age.trim() || !selectedBatch.trim() || !mobile.trim()) {
       setError('Please fill in all the fields.');
       return;
     }
-
+  
     const ageValue = parseInt(age);
     if (isNaN(ageValue) || ageValue < 18 || ageValue > 65) {
       setError('Age should be between 18 and 65.');
       return;
     }
-
+  
     const mobileRegex = /^[0-9]{10}$/; // Simple 10-digit mobile number validation
     if (!mobile.match(mobileRegex)) {
       setError('Please enter a valid 10-digit mobile number.');
       return;
     }
-
+  
     try {
-      const response = await fetch('/api/submitForm', {
+      const response = await fetch('https://flex-backend-20e887823b85.herokuapp.com/submitForm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const responseData = await response.json();
         console.log('Form submitted successfully:', responseData);
-
+  
         // Show success toast
         toast({
           title: 'Form submitted successfully',
@@ -97,7 +97,7 @@ const Form = () => {
           isClosable: true,
           position: 'top-right',
         });
-
+  
         router.push({
           pathname: '/profile',
           query: formData,
